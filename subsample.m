@@ -3,7 +3,7 @@ function subsampled = subsample(inputImg)
     % Get size of input image
     [rows, cols] = size(inputImg(:,:,1));
     % Generate zero matrix with same dimensions as input image
-    subsampled = zeros(rows, cols, 3);
+    subsampled = double(zeros(rows, cols, 3));
     % 4:2:2 subsampling can be done row by row.
     for x = 0:1 : rows-1
         for y = 0:1 : cols-1
