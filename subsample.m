@@ -10,12 +10,12 @@ function subsampled = subsample(inputImg)
             % Each even column will have its cb and cr values applied to the
             % corresponding odd column.
             if mod(y, 2) == 0
-                cb = inputImg(x + 1, y + 1, 2);
-                cr = inputImg(x + 1, y + 1, 3);
+                cb = double(inputImg(x + 1, y + 1, 2));
+                cr = double(inputImg(x + 1, y + 1, 3));
             end
             % Luminance is copied over, while the chroma elements are
             % are taken from the cb and cr values.
-            subsampled(x + 1, y + 1, 1) = inputImg(x + 1, y + 1, 1);
+            subsampled(x + 1, y + 1, 1) = double(inputImg(x + 1, y + 1, 1));
             subsampled(x + 1, y + 1, 2) = cb;
             subsampled(x + 1, y + 1, 3) = cr;
         end
