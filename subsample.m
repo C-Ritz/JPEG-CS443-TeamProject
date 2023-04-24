@@ -5,10 +5,7 @@ function subsampled = subsample(inputImg)
     % Generate zero matrix with same dimensions as input image
     subsampled = zeros(rows, cols, 3);
     % 4:2:2 subsampling can be done row by row.
-    for x = 0:1: rows-1
-        % Initialize cb and cr.
-        cb = 0;
-        cr = 0;
+    for x = 0:1 : rows-1
         for y = 0:1 : cols-1
             % Each even column will have its cb and cr values applied to the
             % corresponding odd column.
