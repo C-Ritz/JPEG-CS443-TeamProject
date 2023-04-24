@@ -24,8 +24,8 @@ function quantized = quantize(inputImg, qf)
         sf = 50 / qf;
     end
     if sf ~= 0
-        QxY = round(QY * sf);
-        QxC = round(QC * sf);
+        QxY = ceil(QY * sf);
+        QxC = ceil(QC * sf);
     else
         QxY = ones(8, 8);
         QxC = ones(8, 8);
