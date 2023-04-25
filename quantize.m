@@ -1,5 +1,5 @@
 % Quantize a YCbCr image.
-function quantized = quantize(inputImg, qf)
+function quantized = quantize(inFile, qf)
     % Define the quantization tables.
     QY = [16 11 10 16 24 40 51 61 ;
           12 12 14 19 26 58 60 55 ;
@@ -34,30 +34,30 @@ function quantized = quantize(inputImg, qf)
 
     % Loop through inputImg matrix, first by plane, then by 8x8 block. 
     for k = 1:3
-        for i = 1:8:size(inputImg, 1)
-            for j = 1:8:size(inputImg, 2)
+        for i = 1:8:size(inFile, 1)
+            for j = 1:8:size(inFile, 2)
                 % Use the Luminance quantization table if it's the
                 % luminance plane, otherwise use the chroma table.
                 if k == 1
-                    inputImg(i:i+7, j:j+7, k) = round(inputImg(i:i+7, j:j+7, k) ./ double(QY));
+                    inFile(i:i+7, j:j+7, k) = round(inFile(i:i+7, j:j+7, k) ./ double(QY));
                 else
-                    inputImg(i:i+7, j:j+7, k) = round(inputImg(i:i+7, j:j+7, k) ./ double(QC));
+                    inFile(i:i+7, j:j+7, k) = round(inFile(i:i+7, j:j+7, k) ./ double(QC));
                 end
             end
         end
     end
-    
+    disp(inFile(1:8,1:8,1:3))
     % Do the same to dequantize, but multiply with the quantization table instead of dividing.
     for k = 1:3
-        for i = 1:8:size(inputImg,1)
-            for j = 1:8:size(inputImg,2)
+        for i = 1:8:size(inFile,1)
+            for j = 1:8:size(inFile,2)
                 if k == 1
-                    inputImg(i:i+7, j:j+7, k) = round(inputImg(i:i+7, j:j+7, k) .* double(QY));
+                    inFile(i:i+7, j:j+7, k) = round(inFile(i:i+7, j:j+7, k) .* double(QY));
                 else
-                    inputImg(i:i+7, j:j+7, k) = round(inputImg(i:i+7, j:j+7, k) .* double(QC));
+                    inFile(i:i+7, j:j+7, k) = round(inFile(i:i+7, j:j+7, k) .* double(QC));
                 end
             end
         end
     end
-    quantized = inputImg;
+    quantized = inFile;
 end
